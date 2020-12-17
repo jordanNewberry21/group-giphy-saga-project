@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import {HashRouter as Router, Route, Link} from 'react-router-dom'; 
-import '../../components/Search/Search';
-import '../../components/Favorites/Favorites';
-
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import Search from '../Search/Search';
+import Favorites from '../Favorites/Favorites';
+import Header from '../Header/Header';
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Giphy Search!</h1>
         <Router>
+          <Header />
           <nav>
             <ul>
-              <li><Link to="/">Search</Link></li>
-              <li><Link to="/favorites">Favorites</Link></li>
+              <li>
+                <Link to='/'>Search</Link>
+              </li>
+              <li>
+                <Link to='/favorites'>Favorites</Link>
+              </li>
             </ul>
           </nav>
-
-          <Route exact path="/" component={Search}/>
-          <Route path="/favorites" component={Favorites}/>
+          <Route exact path='/' component={Search} />
+          <Route path='/favorites' component={Favorites} />
         </Router>
       </div>
     );
