@@ -1,10 +1,12 @@
 import { Component } from 'react';
+import SearchItem from '../SearchItem/SearchItem';
 
 class SearchList extends Component{
     render(){
         return(
             <div>
-                <h2>hello from SearchList component</h2>
+                <h2>Search Results</h2>
+                <SearchItem/>
             </div>
         ) // end return
     } // end render
