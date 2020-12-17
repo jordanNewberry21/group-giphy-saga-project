@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { connect } from 'react-redux';
+import SearchList from '../SearchList/SearchList';
+
 const styles = (theme) => ({
   root: {
     margin: theme.spacing(1),
@@ -63,7 +65,9 @@ class Search extends Component {
             Submit
           </Button>
         </form>
+        <SearchList/>
       </Paper>
+      
     ); // end return
   } // end render
 } // end class
