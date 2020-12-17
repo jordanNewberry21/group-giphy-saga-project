@@ -7,7 +7,7 @@ const api_key = process.env.GIPHY_API_KEY;
 const baseURL = 'http://api.giphy.com/v1/gifs/search?api_key=';
 
 router.get('/:term', (req, res) => {
-  let term = req.body.term;
+  let term = req.params.term;
   let termURL = `&q=${term}&limit=2&lang=en`;
   if (term.length > 0) {
     let finalURL = baseURL + api_key + termURL;
