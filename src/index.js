@@ -12,8 +12,27 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import {takeEvery, put} from 'redux-saga/effects';
 
-function* watcherSaga() {
+// reducer for storing search query
+const searchString = (state=[], action) => {
+    if (action.type === 'SET_RESULTS') {
+        return action.payload;
+    }
+    return state;
+}
 
+function* watcherSaga() {
+    yield takeEvery('SEARCH', searchGiphy);
+}
+
+function* searchGiphy(action) {
+    console.log('in searchGiphy saga function.....');
+    try {
+        const response = yield axios.get('/api/search'+action.payload);
+        yield put({type: 'SET_RESULTS', payload: response.data})
+    } catch (error) {
+        console.log('error with add fruit request.....', error);
+        alert('something went wrong. please try again.');
+    }
 }
 
 // Create sagaMiddleware
@@ -21,7 +40,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const storeInstance = createStore(
     combineReducers({
-        
+        searchString,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
