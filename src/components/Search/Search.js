@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { connect } from 'react-redux';
 const styles = (theme) => ({
   root: {
     margin: theme.spacing(1),
@@ -67,4 +68,4 @@ class Search extends Component {
   } // end render
 } // end class
 
-export default withStyles(styles)(Search);
+export default withStyles(styles)(connect()(Search));
