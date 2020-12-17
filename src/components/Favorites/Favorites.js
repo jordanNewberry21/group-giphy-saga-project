@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+
 class Favorites extends Component {
   render() {
     return (
@@ -9,4 +11,4 @@ class Favorites extends Component {
   } // end render
 } // end class
 
-export default Favorites;
+export default connect()(Favorites);
