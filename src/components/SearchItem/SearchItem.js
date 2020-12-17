@@ -10,7 +10,7 @@ class SearchItem extends Component{
                     {this.props.reduxState.searchString.map(img => 
                         <li>
                             <img key={img.id} src={img.images.original.url}/>
-                            <button onClick={this.props.dispatch({type: SET_FAVORITE, payload: img.images.original.url})}>Favorite</button>
+                            <button onClick={() => this.props.dispatch({type: 'SET_FAVORITE', payload: img.images.original.url})}>Favorite</button>
                         </li>
                     )}
                 </ul>
