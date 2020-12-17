@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import SearchItem from '../SearchItem/SearchItem';
 
 class SearchList extends Component{

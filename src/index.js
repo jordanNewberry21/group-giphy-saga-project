@@ -28,7 +28,7 @@ function* searchGiphy(action) {
   console.log('in searchGiphy saga function.....');
   try {
     const response = yield axios.get('/api/search/' + action.payload.term);
-    yield put({ type: 'SET_RESULTS', payload: response.data });
+    yield put({ type: 'SET_RESULTS', payload: response.data.data });
   } catch (error) {
     console.log('error with add fruit request.....', error);
     alert('something went wrong. please try again.');
