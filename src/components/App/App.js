@@ -25,6 +25,7 @@ class App extends Component {
       <div>
         <Router>
           <Header />
+          {/* ADD FOCUS FIXING  */}
           <AppBar position='static'>
             <Tabs
               value={this.state.value}
