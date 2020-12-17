@@ -1,6 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
-
+require('dotenv').config();
 const router = express.Router();
 
 // return all favorite images
