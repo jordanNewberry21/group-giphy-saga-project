@@ -36,8 +36,9 @@ function* watcherSaga() {
 
 function* addFavorite(action) {
     console.log('in addFavorite saga function.........');
+    console.log(action.payload);
     try {
-        yield axios.post('/api/favorite', action.payload);
+        yield axios.post('/api/favorite', {url: action.payload});
         yield put({type: 'FETCH_FAVORITES'});
     } catch (error) {
         console.log('error with add favorite request.....', error);
