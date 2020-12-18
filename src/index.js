@@ -40,6 +40,7 @@ function* watcherSaga() {
   yield takeEvery('SET_FAVORITE', addFavorite);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
   yield takeEvery('FETCH_CATEGORY', getCategories);
+  yield takeEvery('UPDATE_CATEGORY', updateCategory);
 }
 
 function* addFavorite(action) {
@@ -82,6 +83,17 @@ function* getCategories() {
     yield put({ type: 'SET_CATEGORY', payload: response.data });
   } catch (error) {
     console.log('Error when fetching data from category db: ', error);
+  }
+}
+
+function* updateCategory(action) {
+  try {
+    yield axios.put('/api/favorite/' + action.payload.img_id, {
+      category_id: action.payload.category_id,
+    });
+    fetchFavorites();
+  } catch (error) {
+    console.log('Error when updating data from category db: ', error);
   }
 }
 
