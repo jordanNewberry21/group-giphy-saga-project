@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Grid,
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Typography,
 } from '@material-ui/core';
+
 class Favorites extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_FAVORITES' });
@@ -27,6 +29,14 @@ class Favorites extends Component {
             <Card component={Card} className={classes.root}>
               <CardContent>
                 <Typography variant='h4'>{img.title}</Typography>
+              </CardContent>
+              <CardMedia
+                component='img'
+                className={classes.media}
+                image={img.url}
+                alt={img.title}
+              />
+              <CardActions>
                 <label for='category'>Classify a category</label>
                 <select
                   onChange={(e) => this.submit(e, img.id)}
@@ -38,14 +48,20 @@ class Favorites extends Component {
                   <option value='nsfw'>NSFW</option>
                   <option value='meme'>Meme</option>
                 </select>
-              </CardContent>
-              <CardMedia
-                component='img'
-                className={classes.media}
-                image={img.url}
-                alt={img.title}
-              />
-              <CardActions></CardActions>
+                <Button
+                  //   className={classes.button}
+                  variant='contained'
+                  color='primary'
+                  onClick={() =>
+                    this.props.dispatch({
+                      type: 'DELETE_FAVORITE',
+                      payload: img.id,
+                    })
+                  }
+                >
+                  DELETE
+                </Button>
+              </CardActions>
             </Card>
           </Grid>
         ))}
