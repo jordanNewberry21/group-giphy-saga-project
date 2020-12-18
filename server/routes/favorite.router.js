@@ -43,7 +43,7 @@ router.put('/:id', (req, res) => {
   pool
     .query(sqlText, [req.body.category_id, giphId])
     .then((result) => {
-      res.sendStatus(200);
+      res.sendStatus(204);
     })
     .catch((error) => {
       console.log('Error changing category, id', error);
