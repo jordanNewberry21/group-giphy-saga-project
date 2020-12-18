@@ -5,9 +5,10 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  
-
-  res.sendStatus(200);
+  const sqlText = `SELECT * from favorite`;
+  pool.query(sqlText)
+  .then(result => {console.log(result.rows); res.send(result.rows)})
+  .catch(error => {console.log('error retrieving favorite giphys', error)})
 });
 
 // add a new favorite 
