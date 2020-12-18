@@ -3,8 +3,13 @@ import {connect} from 'react-redux';
 
 class Favorites extends Component {
 
-  submit = (e) => {
-    this.props.dispatch({type: 'FETCH_CATEGORIES', payload: e.target.value})
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_FAVORITES'});
+  }
+
+  submit = (e, id) => {
+    let payload = { category_id: e.target.value, img_id: id};
+    this.props.dispatch({type: 'FETCH_CATEGORIES', payload: payload});
   }
 
   render() {
@@ -16,7 +21,7 @@ class Favorites extends Component {
                 <div>
                     <img key={img.id} src={img.url} alt="favorite gif"/>
                     <label for = "category">Classify a category</label>
-                    <select onChange={(e) => this.submit(e)} name="category">
+                    <select onChange={(e) => this.submit(e, img.id)} name="category">
                       <option value ="funny">Funny</option>
                       <option value="cohort">Cohort</option>
                       <option value="cartoon">Cartoon</option>
