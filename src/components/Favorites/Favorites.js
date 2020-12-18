@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 class Favorites extends Component {
+
+  submit = (e) => {
+    this.props.dispatch({type: 'FETCH_CATEGORIES', payload: e.target.value})
+  }
+
   render() {
     return (
       <div>
@@ -11,13 +16,14 @@ class Favorites extends Component {
                 <div>
                     <img key={img.id} src={img.url} alt="favorite gif"/>
                     <label for = "category">Classify a category</label>
-                    <select name="category">
+                    <select onChange={(e) => this.submit(e)} name="category">
                       <option value ="funny">Funny</option>
                       <option value="cohort">Cohort</option>
                       <option value="cartoon">Cartoon</option>
                       <option value="nsfw">NSFW</option>
                       <option value="meme">Meme</option>
                     </select>
+                    {/* <button onClick={this.submit}></button> */}
                 </div>)}
         </div>
       </div>
