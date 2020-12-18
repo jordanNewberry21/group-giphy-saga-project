@@ -39,35 +39,36 @@ class Search extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <Paper className={classes.paper}>
-        <Typography variant='h4'>Search for a Gif!</Typography>
-        <form
-          autoComplete='on'
-          noValidate
-          className={`${classes.root} ${classes.form}`}
-          onSubmit={this.handleSubmit}
-        >
-          <TextField
-            name='search'
-            helperText='Please enter a search term for giphy api'
-            variant='outlined'
-            label='Search Term'
-            fullWidth
-            value={this.state.search}
-            onChange={this.handleChange}
-          />
-          <Button
-            className={classes.button}
-            variant='contained'
-            color='primary'
-            type='submit'
+      <>
+        <Paper className={classes.paper}>
+          <Typography variant='h4'>Search for a Gif!</Typography>
+          <form
+            autoComplete='on'
+            noValidate
+            className={`${classes.root} ${classes.form}`}
+            onSubmit={this.handleSubmit}
           >
-            Submit
-          </Button>
-        </form>
-        <SearchList/>
-      </Paper>
-      
+            <TextField
+              name='search'
+              helperText='Please enter a search term for giphy api'
+              variant='outlined'
+              label='Search Term'
+              fullWidth
+              value={this.state.search}
+              onChange={this.handleChange}
+            />
+            <Button
+              className={classes.button}
+              variant='contained'
+              color='primary'
+              type='submit'
+            >
+              Submit
+            </Button>
+          </form>
+        </Paper>
+        <SearchList />
+      </>
     ); // end return
   } // end render
 } // end class

@@ -8,7 +8,7 @@ const baseURL = 'http://api.giphy.com/v1/gifs/search?api_key=';
 
 router.get('/:term', (req, res) => {
   let term = req.params.term;
-  let termURL = `&q=${term}&limit=2&lang=en`;
+  let termURL = `&q=${term}&limit=10&lang=en`;
   if (term.length > 0) {
     let finalURL = baseURL + api_key + termURL;
     axios
