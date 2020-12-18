@@ -28,10 +28,18 @@ const favorites = (state = [], action) => {
   return state;
 };
 
+const categories = (state = [], action) => {
+  if (action.type === 'SET_CATEGORY') {
+    return action.payload;
+  }
+  return state;
+};
+
 function* watcherSaga() {
   yield takeEvery('SEARCH', searchGiphy);
   yield takeEvery('SET_FAVORITE', addFavorite);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+  yield takeEvery('FETCH_CATEGORY', getCategories);
 }
 
 function* addFavorite(action) {
@@ -63,8 +71,17 @@ function* searchGiphy(action) {
     const response = yield axios.get('/api/search/' + action.payload.term);
     yield put({ type: 'SET_RESULTS', payload: response.data.data });
   } catch (error) {
-    console.log('error with add fruit request.....', error);
+    console.log('Error with search request.....', error);
     alert('something went wrong. please try again.');
+  }
+}
+
+function* getCategories() {
+  try {
+    const response = yield axios.get('/api/category');
+    yield put({ type: 'SET_CATEGORY', payload: response.data });
+  } catch (error) {
+    console.log('Error when fetching data from category db: ', error);
   }
 }
 
