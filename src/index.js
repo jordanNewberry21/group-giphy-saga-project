@@ -21,40 +21,40 @@ const searchString = (state = [], action) => {
 };
 
 // favorites reducer for storing clicked gifs before they get sent to DB
-const favorites = (state=[], action) => {
-    if (action.type === 'GET_FAVORITES') {
-        return action.payload;
-    }
-    return state;
-}
+const favorites = (state = [], action) => {
+  if (action.type === 'GET_FAVORITES') {
+    return action.payload;
+  }
+  return state;
+};
 
 function* watcherSaga() {
-    yield takeEvery('SEARCH', searchGiphy);
-    yield takeEvery('SET_FAVORITE', addFavorite);
-    yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+  yield takeEvery('SEARCH', searchGiphy);
+  yield takeEvery('SET_FAVORITE', addFavorite);
+  yield takeEvery('FETCH_FAVORITES', fetchFavorites);
 }
 
 function* addFavorite(action) {
-    console.log('in addFavorite saga function.........');
-    console.log(action.payload);
-    try {
-        yield axios.post('/api/favorite', {url: action.payload});
-        yield put({type: 'FETCH_FAVORITES'});
-    } catch (error) {
-        console.log('error with add favorite request.....', error);
-        alert('something went wrong. please try again.');
-    }
+  console.log('in addFavorite saga function.........');
+  console.log(action.payload);
+  try {
+    yield axios.post('/api/favorite', { url: action.payload });
+    yield put({ type: 'FETCH_FAVORITES' });
+  } catch (error) {
+    console.log('error with add favorite request.....', error);
+    alert('something went wrong. please try again.');
+  }
 }
 
 function* fetchFavorites() {
-    console.log('in fetch favorites saga.......');
-    try {
-        const response = yield axios.get('/api/favorite')
-        yield put({type: 'GET_FAVORITES', payload: response.data})
-    } catch (error) {
-        console.log('error with favorite get request.....', error);
-        alert('something went wrong. please try again.');
-    }
+  console.log('in fetch favorites saga.......');
+  try {
+    const response = yield axios.get('/api/favorite');
+    yield put({ type: 'GET_FAVORITES', payload: response.data });
+  } catch (error) {
+    console.log('error with favorite get request.....', error);
+    alert('something went wrong. please try again.');
+  }
 }
 
 function* searchGiphy(action) {
@@ -72,12 +72,12 @@ function* searchGiphy(action) {
 const sagaMiddleware = createSagaMiddleware();
 
 const storeInstance = createStore(
-    combineReducers({
-        searchString,
-        favorites,
-    }),
-    // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware, logger),
+  combineReducers({
+    searchString,
+    favorites,
+  }),
+  // Add sagaMiddleware to our store
+  applyMiddleware(sagaMiddleware, logger)
 );
 
 sagaMiddleware.run(watcherSaga);
