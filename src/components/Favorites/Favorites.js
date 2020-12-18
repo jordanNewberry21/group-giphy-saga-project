@@ -16,7 +16,7 @@ class Favorites extends Component {
   }
 
   submit = (e, id) => {
-    let payload = { category_id: e.target.value, img_id: id };
+    let payload = { category_id: Number(e.target.value), img_id: id };
     this.props.dispatch({ type: 'UPDATE_CATEGORY', payload: payload });
   };
 
@@ -37,7 +37,7 @@ class Favorites extends Component {
                 alt={img.title}
               />
               <CardActions>
-                <label for='category'>Classify a category</label>
+                <label htmlFor='category'>Classify a category</label>
                 <select
                   onChange={(e) => this.submit(e, img.id)}
                   name='category'
