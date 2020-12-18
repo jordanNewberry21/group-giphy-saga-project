@@ -17,7 +17,7 @@ class Favorites extends Component {
 
   submit = (e, id) => {
     let payload = { category_id: e.target.value, img_id: id };
-    this.props.dispatch({ type: 'FETCH_CATEGORIES', payload: payload });
+    this.props.dispatch({ type: 'UPDATE_CATEGORY', payload: payload });
   };
 
   render() {
@@ -42,11 +42,11 @@ class Favorites extends Component {
                   onChange={(e) => this.submit(e, img.id)}
                   name='category'
                 >
-                  <option value='funny'>Funny</option>
-                  <option value='cohort'>Cohort</option>
-                  <option value='cartoon'>Cartoon</option>
-                  <option value='nsfw'>NSFW</option>
-                  <option value='meme'>Meme</option>
+                  <option value='1'>Funny</option>
+                  <option value='2'>Cohort</option>
+                  <option value='3'>Cartoon</option>
+                  <option value='4'>NSFW</option>
+                  <option value='5'>Meme</option>
                 </select>
                 <Button
                   //   className={classes.button}
