@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 
 class Favorites extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_FAVORITES'});
+  }
+
   submit = (e, id) => {
     let payload = { category_id: e.target.value, img_id: id};
     this.props.dispatch({type: 'FETCH_CATEGORIES', payload: payload});
