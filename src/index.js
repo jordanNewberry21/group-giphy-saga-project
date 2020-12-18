@@ -28,19 +28,18 @@ const favorites = (state = [], action) => {
   return state;
 };
 
-const categories = (state = [], action) => {
-  if (action.type === 'SET_CATEGORY') {
-    return action.payload;
-  }
-  return state;
-};
-
 function* watcherSaga() {
   yield takeEvery('SEARCH', searchGiphy);
   yield takeEvery('SET_FAVORITE', addFavorite);
   yield takeEvery('FETCH_FAVORITES', fetchFavorites);
   yield takeEvery('FETCH_CATEGORY', getCategories);
   yield takeEvery('UPDATE_CATEGORY', updateCategory);
+  yield takeEvery('DELETE_FAVORITE', deleteFavorite);
+}
+
+function* deleteFavorite(action) {
+  yield axios.delete('api/favorite/' + action.payload);
+  yield fetchFavorites();
 }
 
 function* addFavorite(action) {
@@ -91,7 +90,7 @@ function* updateCategory(action) {
     yield axios.put('/api/favorite/' + action.payload.img_id, {
       category_id: action.payload.category_id,
     });
-    fetchFavorites();
+    yield fetchFavorites();
   } catch (error) {
     console.log('Error when updating data from category db: ', error);
   }
